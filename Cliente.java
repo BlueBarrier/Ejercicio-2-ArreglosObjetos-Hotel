@@ -1,3 +1,14 @@
+/**
+ * Universidad del Valle DE Guatemala
+ * Departamento de Ciencias de la Computación
+ * Programación Orientada a Objetos - CC2008 - 50
+ * 
+ * @author: Erick Barrera - 231238
+ * @Description: Clase Cliente, crea instancias del tipo Cliente almacenando la información de cada cliente y clasificandolos según su tipo
+ * @version: 1.0
+ * @Fecha: 23/08/2023
+ * @Fecha_ultima_modificación: 23/08/2023
+ */
 public class Cliente{
     public String nombre, tipo;
     public int estadia, ocupantes, visitasAnt;
