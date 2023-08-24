@@ -9,18 +9,40 @@
  * @Fecha: 24/08/2023
  * @Fecha_ultima_modificación: 24/08/2023
  */
+import java.util.ArrayList;
+
 public class Reserva {
-    public Cliente[] listaEspera;
-    public Cliente[] clientes;
-    public Habitacion[] habitaciones;
-    int i = 0; 
-    int j = 0;
-    public void agregarHabitacion(Habitacion habitacion){ // método para agregar una habitación a la lista
-        habitaciones[0+i] = habitacion;
-        i++; 
+    private ArrayList<Cliente> clientes;
+    private ArrayList<Habitacion> habitaciones;
+
+    public Reserva() {
+        this.clientes = new ArrayList<Cliente>();
+        this.habitaciones = new ArrayList<Habitacion>();
     }
-    public void agregarCliente(Cliente cliente){ // agregar clientes a la lista clientes
-        clientes[0+j] = cliente;
-        j++;
+
+    public ArrayList<Cliente> getClientes() {
+        return this.clientes;
+    }
+
+    public ArrayList<Habitacion> getHabitaciones() {
+        return this.habitaciones;
+    }
+
+    public void agregarHabitacion(Habitacion habitacion) {
+        this.habitaciones.add(habitacion);
+    }
+
+    public void agregarCliente(Cliente cliente) {
+        this.clientes.add(cliente);
+    }
+
+    public boolean reservar(Cliente cliente, Habitacion habitacion) {
+        if (cliente.getAsignado() || habitacion.getReserva()) {
+            return false;
+        } else {
+            cliente.setAsignado(true);
+            habitacion.setReserva(true);
+            return true;
+        }
     }
 }
