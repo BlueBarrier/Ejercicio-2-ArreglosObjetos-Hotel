@@ -44,6 +44,7 @@ public class Hotel {
                     int visitasAnt = entradaDatos.pedirVisitas();
 
                     Cliente cliente = new Cliente(nombre, estadia, ocupantes, visitasAnt);
+                    cliente.asignarTipo(visitasAnt);
                     reserva.agregarCliente(cliente);
                     break;
                 case 3:
@@ -71,12 +72,14 @@ public class Hotel {
 
                     if (clienteReserva != null && habitacionReserva != null) {
                         boolean resultado = reserva.reservar(clienteReserva, habitacionReserva);
-                        if (resultado) {
-                            System.out.println("Reserva realizada con éxito");
-                        } else {
-                            System.out.println("No se pudo realizar la reserva");
-                        }
-                    } else {
+                        if(clienteReserva.getTipo() == habitacionReserva.getTipo()){
+                            if (resultado) {
+                                System.out.println("Reserva realizada con éxito");
+                            } else {
+                                System.out.println("No se pudo realizar la reserva");
+                            }
+                        } else{System.out.println("Lo sentimos, la clasificación del cliente no coincide con el tipo de habitación");}
+                    }else {
                         System.out.println("No se encontró al cliente o la habitación especificados");
                     }
                     break;
