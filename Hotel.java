@@ -105,6 +105,7 @@ public class Hotel {
                     System.out.println("Opción inválida");
             }
         }
+        scanner.close();
     }
 }
 
