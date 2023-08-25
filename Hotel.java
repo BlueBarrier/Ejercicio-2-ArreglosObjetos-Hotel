@@ -71,7 +71,7 @@ public class Hotel {
                         }
                     }
 
-                    if (clienteReserva != null && habitacionReserva != null) {
+                    if (clienteReserva != null && habitacionReserva != null && clienteReserva.getEstadia()<= habitacionReserva.getOcupacionMax()) {
                         boolean reservado = !(clienteReserva.getAsignado() || habitacionReserva.getReserva());
                         boolean condicional = clienteReserva.getTipo().equals(habitacionReserva.getTipo());
                         if(condicional){
@@ -87,7 +87,7 @@ public class Hotel {
                             reserva.addEnEspera(clienteReserva);
                         }
                     }else {
-                        System.out.println("No se encontró al cliente o la habitación especificados");
+                        System.out.println("No se encontró al cliente o la habitación especificados o su número de ocupantes supera la cantidad máxima de huéspedes por habitación\n");
                     }
                     break;
                 case 4:
