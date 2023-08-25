@@ -14,10 +14,12 @@ import java.util.ArrayList;
 public class Reserva {
     private ArrayList<Cliente> clientes;
     private ArrayList<Habitacion> habitaciones;
+    private ArrayList<Cliente> enEspera;
 
     public Reserva() {
         this.clientes = new ArrayList<Cliente>();
         this.habitaciones = new ArrayList<Habitacion>();
+        this.enEspera = new ArrayList<Cliente>();
     }
 
     public ArrayList<Cliente> getClientes() {
@@ -28,6 +30,12 @@ public class Reserva {
         return this.habitaciones;
     }
 
+    public ArrayList<Cliente> getEnEspera() {
+        return enEspera;
+    }
+    public void addEnEspera(Cliente esperado) {
+        enEspera.add(esperado);
+    }
     public void agregarHabitacion(Habitacion habitacion) {
         this.habitaciones.add(habitacion);
     }
@@ -43,6 +51,17 @@ public class Reserva {
             cliente.setAsignado(true);
             habitacion.setReserva(true);
             return true;
+        }
+    }
+    public void aEsperar(Cliente cliente){
+        enEspera.add(cliente);
+    }
+    public void  getEspera(){
+        System.out.println("Lista de clientes en espera: ");
+        for(Cliente c : enEspera){
+            int count = 1;
+            System.out.printf("%d. %s \n",count, c.getNombre());
+            count++;
         }
     }
 }

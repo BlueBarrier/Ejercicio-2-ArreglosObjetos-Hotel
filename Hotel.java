@@ -24,7 +24,8 @@ public class Hotel {
             System.out.println("2. Agregar nuevo cliente");
             System.out.println("3. Realizar reserva");
             System.out.println("4. Ver reservas");
-            System.out.println("5. Salir");
+            System.out.println("5. Clientes en espera");
+            System.out.println("6. Salir");
             int opcion = scanner.nextInt();
             scanner.nextLine();
             switch (opcion) {
@@ -71,14 +72,20 @@ public class Hotel {
                     }
 
                     if (clienteReserva != null && habitacionReserva != null) {
-                        boolean resultado = reserva.reservar(clienteReserva, habitacionReserva);
-                        if(clienteReserva.getTipo() == habitacionReserva.getTipo()){
-                            if (resultado) {
+                        boolean reservado = !(clienteReserva.getAsignado() || habitacionReserva.getReserva());
+                        boolean condicional = clienteReserva.getTipo().equals(habitacionReserva.getTipo());
+                        if(condicional){
+                            if (reservado) {
                                 System.out.println("Reserva realizada con éxito");
+                                reserva.reservar(clienteReserva, habitacionReserva);
                             } else {
                                 System.out.println("No se pudo realizar la reserva");
+                                reserva.addEnEspera(clienteReserva);
                             }
-                        } else{System.out.println("Lo sentimos, la clasificación del cliente no coincide con el tipo de habitación");}
+                        } else{
+                            System.out.println("Lo sentimos, la clasificación del cliente no coincide con el tipo de habitación");
+                            reserva.addEnEspera(clienteReserva);
+                        }
                     }else {
                         System.out.println("No se encontró al cliente o la habitación especificados");
                     }
@@ -97,8 +104,12 @@ public class Hotel {
                         }
                     }
                 break;
-                
                 case 5:
+                    if(!(reserva.getEnEspera()==null)){
+                        reserva.getEspera();
+                    }else{System.out.println("Lista vacía");}
+                    break;
+                case 6:
                     salir = true;
                     break;
                 default:
